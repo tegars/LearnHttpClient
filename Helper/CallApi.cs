@@ -47,5 +47,29 @@ namespace LearnHttpClient.Helper
             var products = await responseFreshDesk.Content.ReadAsAsync<Product>();
             return products;
         }
+        public static async Task<Product> UpdateProduct(IConfiguration configuration, HttpClient client, Product product)
+        {
+            var address = $"products/"+product.Id;
+            var normalizedBody = JsonSerializer.Serialize(product);
+            StringContent content = new StringContent(normalizedBody, UnicodeEncoding.UTF8, "application/json");
+            HttpResponseMessage responseFreshDesk = await client.PutAsync(address, content);
+            if (!responseFreshDesk.IsSuccessStatusCode)
+            {
+                throw new Exception();
+            }
+            var products = await responseFreshDesk.Content.ReadAsAsync<Product>();
+            return products;
+        }
+        public static async Task<string> DeleteProduct(IConfiguration configuration, HttpClient client, Guid productId)
+        {
+            var address = $"products/" + productId;
+            HttpResponseMessage responseFreshDesk = await client.DeleteAsync(address);
+            if (!responseFreshDesk.IsSuccessStatusCode)
+            {
+                throw new Exception();
+            }
+            var result = await responseFreshDesk.Content.ReadAsAsync<string>();
+            return result;
+        }
     }
 }

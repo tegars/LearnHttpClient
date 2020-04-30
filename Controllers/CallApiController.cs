@@ -47,5 +47,24 @@ namespace LearnHttpClient.Controllers
             var result = await CallApi.CreateProduct(_configuration, _freshdeskClient, product);
             return Ok("check via debugging");
         }
+        [HttpGet("UpdateProduct")]
+        public async Task<ActionResult> UpdateProduct()
+        {
+            var product = new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = "zzz",
+                Harga = "Rp. 8.000.000",
+                Warna = "Merah zzz"
+            };
+            var result = await CallApi.UpdateProduct(_configuration, _freshdeskClient, product);
+            return Ok("check via debugging");
+        }
+        [HttpGet("DeleteProduct")]
+        public async Task<ActionResult> DeleteProduct()
+        {
+            var result = await CallApi.DeleteProduct(_configuration, _freshdeskClient, Guid.NewGuid());
+            return Ok("check via debugging");
+        }
     }
 }

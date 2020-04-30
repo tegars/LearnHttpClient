@@ -59,14 +59,17 @@ namespace LearnHttpClient.Controllers
 
         // PUT: api/Product/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(Guid id, Product product)
         {
+            var tmp = product;
+            return Ok(tmp);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(Guid id)
         {
+            return Ok("Product is Deleted");
         }
     }
 }
