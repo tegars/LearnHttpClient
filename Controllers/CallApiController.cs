@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using LearnHttpClient.Helper;
+using LearnHttpClient.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +25,14 @@ namespace LearnHttpClient.Controllers
         [HttpGet("GetDatas")]
         public async Task<ActionResult> GetDatas()
         {
-            var products = await CallApi.Products(_configuration, _freshdeskClient);
+            List<Product> products = await CallApi.Products(_configuration, _freshdeskClient);
+            return Ok("check via debugging");
+        }
+        [HttpGet("GetData")]
+        public async Task<ActionResult> GetData()
+        {
+            var productId = Guid.NewGuid();
+            Product products = await CallApi.Product(_configuration, _freshdeskClient, productId);
             return Ok("check via debugging");
         }
     }

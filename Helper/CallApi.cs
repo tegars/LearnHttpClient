@@ -21,5 +21,16 @@ namespace LearnHttpClient.Helper
             var products = await responseFreshDesk.Content.ReadAsAsync<List<Product>>();
             return products;
         }
+        public static async Task<Product> Product(IConfiguration configuration, HttpClient client, Guid productId)
+        {
+            var address = $"products/"+productId;
+            HttpResponseMessage responseFreshDesk = await client.GetAsync(address);
+            if (!responseFreshDesk.IsSuccessStatusCode)
+            {
+                throw new Exception();
+            }
+            var products = await responseFreshDesk.Content.ReadAsAsync<Product>();
+            return products;
+        }
     }
 }

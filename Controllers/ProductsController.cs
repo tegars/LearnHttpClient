@@ -37,12 +37,12 @@ namespace LearnHttpClient.Controllers
 
         // GET: api/Product/5
         [HttpGet("{id}")]
-        public ActionResult<Product> Get(int id)
+        public ActionResult<Product> Get(Guid id)
         {
             var product = new Product()
             {
-                Id = Guid.NewGuid(),
-                Name = "Kickers, id: "+id,
+                Id = id,
+                Name = "Kickers",
                 Harga = "Rp. 800.000",
                 Warna = "Merah"
             };
