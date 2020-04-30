@@ -51,8 +51,10 @@ namespace LearnHttpClient.Controllers
 
         // POST: api/Product
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post(Product product)
         {
+            var tmp = product;
+            return Ok(tmp);
         }
 
         // PUT: api/Product/5
